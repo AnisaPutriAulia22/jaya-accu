@@ -158,10 +158,9 @@
                 dots: true,
                 appendDots: $(this).find('.wrap-slick3-dots'),
                 dotsClass:'slick3-dots',
-                customPaging: function(slick, index) {
-                    var portrait = $(slick.$slides[index]).data('thumb');
-                    return '<img src=" ' + portrait + ' "/><div class="slick3-dot-overlay"></div>';
-                },  
+                customPaging: function() {
+                  return '<span class="slick-dot"></span>';
+              }
             });
         });
             

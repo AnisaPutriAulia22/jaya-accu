@@ -4,6 +4,8 @@
 	<title>@yield('title')</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="csrf-token" content="{{ csrf_token() }}">
+
 <!--===============================================================================================-->	
 	<link rel="icon" type="image/png" href="images/icons/favicon.png"/>
 <!--===============================================================================================-->
@@ -33,6 +35,15 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+	<style>
+		.slick3-dots img {
+    display: none !important;
+}
+	</style>
+	@stack('styles')
+
 <!--===============================================================================================-->
 </head>
 <body class="animsition">
@@ -57,12 +68,10 @@
 							My Account
 						</a>
 
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							EN
-						</a>
+						
 
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							USD
+						<a href="/logout" class="flex-c-m trans-04 p-lr-25">
+							Logout
 						</a>
 					</div>
 				</div>
@@ -88,11 +97,6 @@
 								<a href="/product">Product</a>
 							</li>
 
-							<li >
-								<a href="/checkout">Checkout</a>
-							</li>
-
-
 							<li>
 								<a href="/about">About</a>
 							</li>
@@ -111,7 +115,7 @@
 					<div class="wrap-icon-header flex-w flex-r-m">
 						
 
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
+						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="">
 							<i class="zmdi zmdi-shopping-cart"></i>
 						</div>
 
@@ -181,11 +185,7 @@
 			<ul class="main-menu-m">
 				<li>
 					<a href="index.html">Home</a>
-					<ul class="sub-menu-m">
-						<li><a href="index.html">Homepage 1</a></li>
-						<li><a href="home-02.html">Homepage 2</a></li>
-						<li><a href="home-03.html">Homepage 3</a></li>
-					</ul>
+					
 					<span class="arrow-main-menu-m">
 						<i class="fa fa-angle-right" aria-hidden="true"></i>
 					</span>
@@ -358,11 +358,13 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 		<div class="container">
 			<div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
+				<!-- Tombol Close -->
 				<button class="how-pos3 hov3 trans-04 js-hide-modal1">
 					<img src="images/icons/icon-close.png" alt="CLOSE">
 				</button>
 
 				<div class="row">
+					<!-- Gambar Produk -->
 					<div class="col-md-6 col-lg-7 p-b-30">
 						<div class="p-l-25 p-r-30 p-lr-0-lg">
 							<div class="wrap-slick3 flex-sb flex-w">
@@ -370,31 +372,11 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 								<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
 								<div class="slick3 gallery-lb">
-									<div class="item-slick3" data-thumb="images/product-detail-01.jpg">
+									<div class="item-slick3" >
 										<div class="wrap-pic-w pos-relative">
-											<img src="images/product-detail-01.jpg" alt="IMG-PRODUCT">
+											<img src="" alt="IMG-PRODUCT" class="js-img-detail">
 
-											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-01.jpg">
-												<i class="fa fa-expand"></i>
-											</a>
-										</div>
-									</div>
-
-									<div class="item-slick3" data-thumb="images/product-detail-02.jpg">
-										<div class="wrap-pic-w pos-relative">
-											<img src="images/product-detail-02.jpg" alt="IMG-PRODUCT">
-
-											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-02.jpg">
-												<i class="fa fa-expand"></i>
-											</a>
-										</div>
-									</div>
-
-									<div class="item-slick3" data-thumb="images/product-detail-03.jpg">
-										<div class="wrap-pic-w pos-relative">
-											<img src="images/product-detail-03.jpg" alt="IMG-PRODUCT">
-
-											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-03.jpg">
+											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04 js-img-link" href="">
 												<i class="fa fa-expand"></i>
 											</a>
 										</div>
@@ -403,61 +385,26 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 							</div>
 						</div>
 					</div>
-					
+
+					<!-- Detail Produk -->
 					<div class="col-md-6 col-lg-5 p-b-30">
 						<div class="p-r-50 p-t-5 p-lr-0-lg">
 							<h4 class="mtext-105 cl2 js-name-detail p-b-14">
-								Lightweight Jacket
+								Nama Produk
 							</h4>
 
-							<span class="mtext-106 cl2">
-								$58.79
+							<span class="mtext-106 cl2 js-price-detail">
+								Rp 0
 							</span>
 
-							<p class="stext-102 cl3 p-t-23">
-								Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat.
+							<p class="stext-102 cl3 p-t-23 js-description-detail">
+								Deskripsi produk akan tampil di sini.
 							</p>
-							
-							<!--  -->
+
+							<p class="stext-102 cl3 p-t-10 js-stock-detail">Stock: -</p>
+
+							<!-- Tambah ke keranjang -->
 							<div class="p-t-33">
-								<div class="flex-w flex-r-m p-b-10">
-									<div class="size-203 flex-c-m respon6">
-										Size
-									</div>
-
-									<div class="size-204 respon6-next">
-										<div class="rs1-select2 bor8 bg0">
-											<select class="js-select2" name="time">
-												<option>Choose an option</option>
-												<option>Size S</option>
-												<option>Size M</option>
-												<option>Size L</option>
-												<option>Size XL</option>
-											</select>
-											<div class="dropDownSelect2"></div>
-										</div>
-									</div>
-								</div>
-
-								<div class="flex-w flex-r-m p-b-10">
-									<div class="size-203 flex-c-m respon6">
-										Color
-									</div>
-
-									<div class="size-204 respon6-next">
-										<div class="rs1-select2 bor8 bg0">
-											<select class="js-select2" name="time">
-												<option>Choose an option</option>
-												<option>Red</option>
-												<option>Blue</option>
-												<option>White</option>
-												<option>Grey</option>
-											</select>
-											<div class="dropDownSelect2"></div>
-										</div>
-									</div>
-								</div>
-
 								<div class="flex-w flex-r-m p-b-10">
 									<div class="size-204 flex-w flex-m respon6-next">
 										<div class="wrap-num-product flex-w m-r-20 m-tb-10">
@@ -479,32 +426,13 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 								</div>	
 							</div>
 
-							<!--  -->
-							<div class="flex-w flex-m p-l-100 p-t-40 respon7">
-								<div class="flex-m bor9 p-r-10 m-r-11">
-									<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist">
-										<i class="zmdi zmdi-favorite"></i>
-									</a>
-								</div>
-
-								<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook">
-									<i class="fa fa-facebook"></i>
-								</a>
-
-								<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Twitter">
-									<i class="fa fa-twitter"></i>
-								</a>
-
-								<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Google Plus">
-									<i class="fa fa-google-plus"></i>
-								</a>
-							</div>
 						</div>
-					</div>
+					</div> <!-- end detail -->
 				</div>
 			</div>
 		</div>
 	</div>
+
 
 <!--===============================================================================================-->	
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
@@ -607,6 +535,191 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	</script>
 <!--===============================================================================================-->
 	<script src="js/main.js"></script>
+	<script src="path/to/isotope.pkgd.min.js"></script>
+	<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+	@stack('scripts')
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+			
+			const quickViewButtons = document.querySelectorAll('.js-show-modal1');
+			const modal = document.querySelector('.js-modal1');
+
+			quickViewButtons.forEach(button => {
+				button.addEventListener('click', function (e) {
+					e.preventDefault();
+
+					// Ambil data dari atribut
+					const nama = this.dataset.nama;
+					const deskripsi = this.dataset.deskripsi;
+					const harga = this.dataset.harga;
+					const foto = this.dataset.foto;
+					const stok = this.dataset.stok;
+
+					// Update isi modal
+					document.querySelector('.js-name-detail').textContent = nama;
+					document.querySelector('.js-description-detail').textContent = deskripsi;
+					document.querySelector('.mtext-106.cl2').textContent = 'Rp ' + harga;
+					document.querySelector('.js-modal1 .gallery-lb img').src = foto;
+					document.querySelector('.js-modal1 .gallery-lb a').href = foto;
+					document.querySelector('.js-modal1 p.stext-102.cl3.p-t-10').textContent = 'Stock: ' + stok;
+
+					// Tampilkan modal
+					modal.classList.add('show-modal1');
+				});
+			});
+
+			// Close modal
+			const closeButtons = document.querySelectorAll('.js-hide-modal1');
+			closeButtons.forEach(btn => {
+				btn.addEventListener('click', function () {
+					modal.classList.remove('show-modal1');
+				});
+			});
+		});
+	</script>
+	
+
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+			document.querySelector('.js-addcart-detail').addEventListener('click', function () {
+			
+				const imgSrc = document.querySelector('.js-img-detail').getAttribute('src');
+				const productName = document.querySelector('.js-name-detail').textContent;
+				const productPriceText = document.querySelector('.js-price-detail').textContent;
+				const qty = parseInt(document.querySelector('input[name="num-product"]').value);
+
+				const price = parseFloat(productPriceText.replace(/[^0-9]/g, ''));
+
+
+				const cartItem = document.createElement('li');
+				cartItem.classList.add('header-cart-item', 'flex-w', 'flex-t', 'm-b-12');
+				cartItem.innerHTML = `
+					<div class="header-cart-item-img">
+						<img src="${imgSrc}" alt="IMG">
+					</div>
+
+					<div class="header-cart-item-txt p-t-8">
+						<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+							${productName}
+						</a>
+
+						<span class="header-cart-item-info">
+							${qty} x ${formatRupiah(price)}
+						</span>
+					</div>
+				`;
+				document.querySelector('.header-cart-wrapitem').appendChild(cartItem);
+				updateCartTotal();
+				updateCartCount();
+			});
+
+			function updateCartTotal() {
+				let total = 0;
+				const items = document.querySelectorAll('.header-cart-item');
+
+				items.forEach(item => {
+					const infoText = item.querySelector('.header-cart-item-info').textContent;
+					const match = infoText.match(/(\d+)\s*x\s*Rp\.?\s?([\d.,]+)/);
+					if (match) {
+						const qty = parseInt(match[1]);
+						const price = parseInt(match[2].replace(/[^\d]/g, ''));
+						total += qty * price;
+					}
+				});
+
+				document.querySelector('.header-cart-total').textContent = `Total: ${formatRupiah(total)}`;
+			}
+
+			function updateCartCount() {
+				let count = 0;
+				const items = document.querySelectorAll('.header-cart-item');
+
+				items.forEach(item => {
+					const infoText = item.querySelector('.header-cart-item-info').textContent;
+					const match = infoText.match(/(\d+)\s*x\s*Rp\.?\s?([\d.,]+)/);
+					if (match) {
+						count += parseInt(match[1]);
+					}
+				});
+
+				const cartIcon = document.querySelector('.js-show-cart');
+				if (cartIcon) {
+					cartIcon.setAttribute('data-notify', count);
+				}
+			}
+
+			function formatRupiah(angka) {
+				return new Intl.NumberFormat('id-ID', {
+					style: 'currency',
+					currency: 'IDR',
+					minimumFractionDigits: 0
+				}).format(angka);
+			}
+		});
+	</script>
+	<script>
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('checkoutBtn').addEventListener('click', function () {
+        const items = document.querySelectorAll('.header-cart-item');
+        const cartData = [];
+
+        items.forEach(item => {
+            const name = item.querySelector('.header-cart-item-name').textContent;
+            const info = item.querySelector('.header-cart-item-info').textContent;
+            const img = item.querySelector('img').getAttribute('src');
+
+            const match = info.match(/(\d+)\s*x\s*Rp\.?\s?([\d.,]+)/);
+            if (match) {
+                const qty = parseInt(match[1]);
+                const price = parseInt(match[2].replace(/[^\d]/g, ''));
+                cartData.push({
+                    name: name,
+                    quantity: qty,
+                    price: price,
+                    image: img
+                });
+            }
+        });
+
+        // Kirim ke server
+        fetch('/checkout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') // Laravel CSRF
+            },
+            body: JSON.stringify({cart: cartData})
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert('Checkout berhasil!');
+            // Kosongkan cart kalau perlu
+            document.querySelector('.header-cart-wrapitem').innerHTML = '';
+            updateCartTotal();
+            updateCartCount();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+});
+</script>
+
+
+<script>
+window.addEventListener('load', function () {
+    document.querySelector('.header-cart-wrapitem').addEventListener('click', function (e) {
+        if (e.target.closest('.header-cart-item-img')) {
+            const cartItem = e.target.closest('.header-cart-item');
+            if (cartItem) {
+                cartItem.remove();
+            }
+        }
+    });
+});
+
+</script>
+@stack('js')
 
 </body>
 </html>
