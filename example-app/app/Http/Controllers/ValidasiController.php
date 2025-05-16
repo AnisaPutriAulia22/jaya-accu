@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Validasi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 class ValidasiController extends Controller
@@ -10,7 +10,7 @@ class ValidasiController extends Controller
     public function index()
     {
         $data = DB::table('validasi')->latest()->get();
-
+       
         return view('admin.validasi', ['data' => $data]);
     }
     public function updateStatus($id, $status)

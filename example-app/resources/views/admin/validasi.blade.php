@@ -46,26 +46,29 @@
                             <td><img src="{{ $item->foto }}" alt="foto" width="70"></td>
                             <td>Rp {{ number_format($item->harga, 0, ',', '.') }}</td>
                             <td>
-
                                 <span class="badge {{ 
-                                        $item->status == 'approved' ? 'bg-success' :
-                                        (Str::contains($item->status, 'canceled') ? 'bg-danger' : 'bg-warning') 
-                                    }}">
-                                        {{ ucfirst(str_replace('_', ' ', $item->status)) }}
+                                    $item->status == 'approved' ? 'bg-success' :
+                                    (Str::contains($item->status, 'canceled') ? 'bg-danger' : 'bg-warning') 
+                                }}">
+                                    {{ ucfirst(str_replace('_', ' ', $item->status)) }}
                                 </span>
+                                @if($item->status == 'canceled_by_user' && $item->cancellation_reason)
+                                    <br><small><em>Alasan: {{ $item->cancellation_reason }}</em></small>
+                                @endif
                                 <br>
-
-                                <form action="{{ route('admin.order.updateStatus', ['id' => $item->id, 'status' => 'approved']) }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    <button type="submit" class="btn btn-primary btn-sm">Setuju</button>
-                                </form>
-
-                                <form action="{{ route('admin.order.updateStatus', ['id' => $item->id, 'status' => 'canceled_by_admin']) }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    <button type="submit" class="btn btn-danger btn-sm">Batal</button>
-                                </form>
-
+                                <!-- Tombol aksi admin bisa disesuaikan (disable kalau sudah batal) -->
+                                @if($item->status != 'canceled_by_user' && $item->status != 'canceled_by_admin')
+                                    <form action="{{ route('admin.order.updateStatus', ['id' => $item->id, 'status' => 'approved']) }}" method="POST" style="display:inline;">
+                                        @csrf
+                                        <button type="submit" class="btn btn-primary btn-sm mt-1">Setuju</button>
+                                    </form>
+                                    <form action="{{ route('admin.order.updateStatus', ['id' => $item->id, 'status' => 'canceled_by_admin']) }}" method="POST" style="display:inline;">
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger btn-sm mt-1">Batal</button>
+                                    </form>
+                                @endif
                             </td>
+
                         </tr>
                         @endforeach
                     </tbody>

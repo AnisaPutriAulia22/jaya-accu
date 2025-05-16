@@ -35,15 +35,36 @@ class CheckoutController extends Controller
 
         return view('user.order', compact('order'));
     }
-    public function cancelOrder()
-    {
-        DB::table('validasi')
-            ->where('user', auth()->user()->name)
-            ->latest()
-            ->limit(1)
-            ->update(['status' => 'canceled_by_user']);
+    // public function cancelOrder()
+    // {
+    //     DB::table('validasi')
+    //         ->where('user', auth()->user()->name)
+    //         ->latest()
+    //         ->limit(1)
+    //         ->update(['status' => 'canceled_by_user']);
 
-        return redirect('/order')->with('message', 'Pesanan berhasil dibatalkan.');
+    //     return redirect('/order')->with('message', 'Pesanan berhasil dibatalkan.');
+    // }
+    public function cancel(Request $request)
+    {
+        $request->validate([
+            'reason' => 'required|string',
+        ]);
+
+        $user = auth()->user();
+        $order = DB::table('validasi')->where('user', $user->name)->latest()->first();
+
+        if ($order) {
+            DB::table('validasi')
+                ->where('id', $order->id)
+                ->update([
+                    'status' => 'canceled_by_user',
+                    'cancellation_reason' => $request->reason,
+                ]);
+        }
+
+        return redirect()->back()->with('success', 'Pesanan berhasil dibatalkan.');
     }
+
 
 }

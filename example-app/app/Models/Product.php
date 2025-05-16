@@ -17,8 +17,11 @@ class product extends Model
         'deskripsi',
         'stock',
         'harga',
-        'foto'
+        'foto',
+        'admin_id', 
 
 
     ];
+
+
 }

@@ -286,9 +286,35 @@
 									<div class="block2-txt-child2 flex-r p-t-3">
 										
 									
-										<a href="#" class="btn-addwish-b2 d-block position-relative">
-											<i class="fa-regular fa-comment" style="font-size: 24px; color: #6c757d;"></i>
-										</a>
+									<!-- Trigger modal -->
+									<a href="#" class="btn-addwish-b2 d-block position-relative" data-bs-toggle="modal" data-bs-target="#chatModal">
+										<i class="fa-regular fa-comment" style="font-size: 24px; color: #6c757d;"></i>
+									</a>
+
+									<!-- Modal Chat -->
+									<div class="modal fade" id="chatModal" tabindex="-1" aria-labelledby="chatModalLabel" aria-hidden="true">
+										<div class="modal-dialog modal-dialog-scrollable">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title">Chat dengan Admin</h5>
+													<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+												</div>
+												<div class="modal-body">
+													<div id="chatMessages" style="max-height: 300px; overflow-y: auto;">
+														<!-- History chat user-admin akan di-load di sini -->
+													</div>
+													<form id="chatForm">
+														<div class="input-group mt-3">
+															<input type="text" class="form-control" id="messageInput" placeholder="Ketik pesan..." required>
+															<button class="btn btn-primary" type="submit">Kirim</button>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+									</div>
+
+
 
 									</div>
 								</div>

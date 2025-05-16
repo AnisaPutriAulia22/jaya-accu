@@ -45,15 +45,14 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-            'role' => 'required|in:admin,user'
+            'password' => 'required|string|min:6|confirmed'
         ]);
 
         User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => $request->role,
+            'role' => 'user'
         ]);
 
         return redirect()->route('login')->with('success', 'Registrasi berhasil, silakan login.');

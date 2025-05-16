@@ -139,7 +139,40 @@
 @section('title', 'Order')
 
 @section('content')
+     <!-- Modal -->
+    <div class="modal fade" id="cancelModal" tabindex="-1" aria-labelledby="cancelModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form action="{{ route('order.cancel') }}" method="POST">
+                            @csrf
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="cancelModalLabel">Batalkan Pesanan</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Pilih alasan pembatalan:</p>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="reason" value="Ingin mengubah alamat" id="reason1" required>
+                                    <label class="form-check-label" for="reason1">Ingin mengubah alamat</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="reason" value="Ingin mengubah pesanan" id="reason2">
+                                    <label class="form-check-label" for="reason2">Ingin mengubah pesanan</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="reason" value="Pesanan tidak diperlukan lagi" id="reason3">
+                                    <label class="form-check-label" for="reason3">Pesanan tidak diperlukan lagi</label>
+                                </div>
+                            </div>
 
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                <button type="submit" class="btn btn-danger">Konfirmasi Batalkan</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+    </div>
     <div class="container px-1 px-md-4 py-5 mx-auto">
         <div class="card">
             <!-- Top Info -->
@@ -176,30 +209,26 @@
 
             <!-- Step Icons and Labels -->
             <div class="row justify-content-between top">
-                <div class="row d-flex icon-content">
-                    <img class="icon" src="https://cdn1.iconfinder.com/data/icons/business-management-and-growth-20/64/1010-128.png" alt="Order Processed">
-                    <div class="d-flex flex-column">
-                        <p class="font-weight-bold">Order<br>Processed</p>
-                    </div>
+                <div class="col d-flex flex-column align-items-center icon-content">
+                    <img class="icon" src="https://cdn1.iconfinder.com/data/icons/business-management-and-growth-20/64/1010-128.png" alt="Order Processed" style="width:60px;">
+                    <p class="font-weight-bold mt-2 text-center">Order<br>Processed</p>
                 </div>
-                <div class="row d-flex icon-content">
-                    <img class="icon" src="https://cdn2.iconfinder.com/data/icons/logistics-delivery-1-3/66/20-1024.png" alt="Order Shipped">
-                    <div class="d-flex flex-column">
-                        <p class="font-weight-bold">Order<br>Shipped</p>
-                    </div>
+                <div class="col d-flex flex-column align-items-center icon-content">
+                    <img class="icon" src="https://cdn2.iconfinder.com/data/icons/logistics-delivery-1-3/66/20-1024.png" alt="Order Shipped" style="width:60px;">
+                    <p class="font-weight-bold mt-2 text-center">Order<br>Shipped</p>
                 </div>
-                <div class="row d-flex icon-content">
-                    <img class="icon" src="https://cdn3.iconfinder.com/data/icons/streamline-icon-set-free-pack/48/Streamline-18-128.png" alt="Order En Route">
-                    <div class="d-flex flex-column">
-                        <p class="font-weight-bold">Order<br>En Arrive</p>
-                    </div>
+                <div class="col d-flex flex-column align-items-center icon-content">
+                    <img class="icon" src="https://cdn3.iconfinder.com/data/icons/streamline-icon-set-free-pack/48/Streamline-18-128.png" alt="Order En Route" style="width:60px;">
+                    <p class="font-weight-bold mt-2 text-center">Order<br>En Arrive</p>
                 </div>
-            
             </div>
-            <form action="{{ route('order.cancel') }}" method="POST">
-                @csrf
-                <button type="submit" class="btn btn-danger">Batalkan Pesanan</button>
-            </form>
+
+            <div class="container mt-5">
+                <!-- Tombol Trigger Modal -->
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#cancelModal">
+                    Batalkan Pesanan
+                </button>
+            </div>
 
 
         </div>

@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@yield('title')</title>
-
+     <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link
       rel="shortcut icon"
       href="./assets/compiled/svg/favicon.svg"
@@ -37,9 +38,9 @@
           <div class="sidebar-header position-relative">
             <div class="d-flex justify-content-between align-items-center">
               <div class="logo">
-                <a href="index.html" >
-                    <img src="images/icons/logo.png" alt="Logo" srcset=""/>
-               
+                <a href="" style="font-size: 18px;" >
+                    <img src="images/icons/logo.png" alt="Logo" style="width: 50px; height: auto;"/>
+                    Jaya Accu
                 </a>
               </div>
               <div class="theme-toggle d-flex gap-2 align-items-center mt-2">
@@ -111,32 +112,34 @@
             <ul class="menu">
               <li class="sidebar-title">Menu</li>
 
-              <li class="sidebar-item active">
+              <li class="sidebar-item {{ request()->is('admin') ? 'active' : '' }}">
                 <a href="/admin" class="sidebar-link">
-                  <i class="bi bi-grid-fill"></i>
-                  <span>Dashboard</span>
+                    <i class="bi bi-grid-fill"></i>
+                    <span>Dashboard</span>
                 </a>
               </li>
 
-              <li class="sidebar-item">
-                <a href="validasi" class="sidebar-link">
-                  <i class="fa-solid fa-user-plus"></i>
-                  <span>Validasi</span>
-                </a>
+              <li class="sidebar-item {{ request()->is('validasi') ? 'active' : '' }}">
+                  <a href="/validasi" class="sidebar-link">
+                      <i class="fa-solid fa-user-plus"></i>
+                      <span>Validasi</span>
+                  </a>
               </li>
 
-              <li class="sidebar-item">
-                <a href="/products" class="sidebar-link">
-                  <i class="bi bi-grid-1x2-fill"></i>
-                  <span>Product</span>
-                </a>
+              <li class="sidebar-item {{ request()->is('products') ? 'active' : '' }}">
+                  <a href="/products" class="sidebar-link">
+                      <i class="bi bi-grid-1x2-fill"></i>
+                      <span>Product</span>
+                  </a>
               </li>
-              <li class="sidebar-item">
-                <a href="/chat" class="sidebar-link">
-                <i class="fas fa-comment-dots"></i>
-                  <span>Chat User</span>
-                </a>
+
+              <li class="sidebar-item {{ request()->is('chat') ? 'active' : '' }}">
+                  <a href="/chat" class="sidebar-link">
+                      <i class="fas fa-comment-dots"></i>
+                      <span>Chat User</span>
+                  </a>
               </li>
+
               <li class="sidebar-item">
                 <a href="/logout" class="sidebar-link">
                   <i class="fa-solid fa-arrow-right-from-bracket"></i>
@@ -167,5 +170,8 @@
     <script src="assets/extensions/apexcharts/apexcharts.min.js"></script>
     <script src="assets/static/js/pages/dashboard.js"></script>
     
+
+
+
   </body>
 </html>

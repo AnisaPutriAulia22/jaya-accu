@@ -23,6 +23,17 @@ class User extends Authenticatable
         'password',
         'role'
     ];
+    public function chats()
+{
+    return $this->hasMany(Chat::class);
+}
+    public function latestChat()
+{
+    return $this->hasOne(Chat::class)->latestOfMany();
+}
+
+
+
 
     /**
      * The attributes that should be hidden for serialization.

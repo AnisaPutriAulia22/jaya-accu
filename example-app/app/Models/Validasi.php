@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Validasi extends Model
 {
     protected $table = 'validasi';
-    protected $fillable = ['user', 'product', 'yang_dibeli', 'foto', 'harga'];
+    protected $fillable = ['user', 'product', 'yang_dibeli', 'foto', 'harga', 'admin_id'];
 }

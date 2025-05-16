@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ValidasiController;
 /*
 |--------------------------------------------------------------------------
@@ -43,7 +44,11 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('products', ProductController::class);
     Route::get('validasi', [ValidasiController::class, 'index'])->name('admin.validasi');
     Route::post('/admin/order/{id}/status/{status}', [ValidasiController::class, 'updateStatus'])->name('admin.order.updateStatus');
-    Route::get('/chat', fn() => view('admin.chat'));
+
+Route::get('chat', [ChatController::class, 'adminChatView']);
+Route::get('/admin/chat-history/{user_id}', [ChatController::class, 'adminHistory']);
+Route::post('/admin/send-message', [ChatController::class, 'adminSend']);
+
 });
 
 // USER
@@ -55,7 +60,11 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::get('/contact', fn() => view('user.contact'));
 
     Route::get('order', [CheckoutController::class, 'showOrder'])->name('checkout.order');
-    Route::post('/order/cancel', [CheckoutController::class, 'cancelOrder'])->name('order.cancel');
+    // Route::post('/order/cancel', [CheckoutController::class, 'cancelOrder'])->name('order.cancel');
+    Route::post('/order/cancel', [CheckoutController::class, 'cancel'])->name('order.cancel');
+
+Route::get('/user/chat-history', [ChatController::class, 'userHistory']);
+Route::post('/user/send-message', [ChatController::class, 'userSend']);
 
 });
 Route::post('/checkout', [CheckoutController::class, 'store']);

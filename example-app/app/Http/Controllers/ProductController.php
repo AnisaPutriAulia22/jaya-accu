@@ -18,7 +18,9 @@ class ProductController extends Controller
     $products = Product::all();
 
     // Mengirim data produk ke view 'products.index'
+
     return view('admin.product', compact('products'));
+
     }
 
     /**
@@ -56,6 +58,7 @@ class ProductController extends Controller
             'stock' => $request->stock,
             'harga' => $request->harga,
             'foto' => $imageName ?? null,
+        
         ]);
     
         return redirect()->route('products.index');

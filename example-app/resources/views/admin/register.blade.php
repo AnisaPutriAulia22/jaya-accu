@@ -30,14 +30,7 @@
             <input type="password" name="password_confirmation" class="w-full border border-gray-300 p-2 rounded" required>
         </div>
 
-        <div class="mb-4">
-            <label for="role" class="block text-gray-700">Role</label>
-            <select name="role" class="w-full border border-gray-300 p-2 rounded" required>
-                <option value="">-- Pilih Role --</option>
-                <option value="admin">Admin</option>
-                <option value="user">User</option>
-            </select>
-        </div>
+        
 
         <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">
             Register

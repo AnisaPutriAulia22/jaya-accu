@@ -56,19 +56,23 @@
 			<div class="top-bar">
 				<div class="content-topbar flex-sb-m h-full container">
 					<div class="left-top-bar">
-						Free shipping for standard order over $100
+						
 					</div>
 
 					<div class="right-top-bar flex-w h-full">
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							Help & FAQs
-						</a>
+						
 
 						<a href="/account" class="flex-c-m trans-04 p-lr-25">
 							My Account
 						</a>
 
-						
+						<a href="#" class="flex-c-m trans-04 p-lr-25">
+							EN
+						</a>
+
+						<a href="#" class="flex-c-m trans-04 p-lr-25">
+							USD
+						</a>
 
 						<a href="/logout" class="flex-c-m trans-04 p-lr-25">
 							Logout
@@ -517,8 +521,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	
 	</script>
 <!--===============================================================================================-->
-	<script src="vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-	<script>
+<script src="vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script>
 		$('.js-pscroll').each(function(){
 			$(this).css('position','relative');
 			$(this).css('overflow','hidden');
@@ -532,13 +536,13 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 				ps.update();
 			})
 		});
-	</script>
+</script>
 <!--===============================================================================================-->
 	<script src="js/main.js"></script>
 	<script src="path/to/isotope.pkgd.min.js"></script>
 	<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
 	@stack('scripts')
-	<script>
+<script>
 		document.addEventListener('DOMContentLoaded', function () {
 			
 			const quickViewButtons = document.querySelectorAll('.js-show-modal1');
@@ -576,10 +580,10 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 				});
 			});
 		});
-	</script>
+</script>
 	
 
-	<script>
+<script>
 		document.addEventListener('DOMContentLoaded', function () {
 			document.querySelector('.js-addcart-detail').addEventListener('click', function () {
 			
@@ -656,70 +660,97 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 				}).format(angka);
 			}
 		});
-	</script>
-	<script>
-document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('checkoutBtn').addEventListener('click', function () {
-        const items = document.querySelectorAll('.header-cart-item');
-        const cartData = [];
+</script>
+<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		document.getElementById('checkoutBtn').addEventListener('click', function () {
+			const items = document.querySelectorAll('.header-cart-item');
+			const cartData = [];
 
-        items.forEach(item => {
-            const name = item.querySelector('.header-cart-item-name').textContent;
-            const info = item.querySelector('.header-cart-item-info').textContent;
-            const img = item.querySelector('img').getAttribute('src');
+			items.forEach(item => {
+				const name = item.querySelector('.header-cart-item-name').textContent;
+				const info = item.querySelector('.header-cart-item-info').textContent;
+				const img = item.querySelector('img').getAttribute('src');
 
-            const match = info.match(/(\d+)\s*x\s*Rp\.?\s?([\d.,]+)/);
-            if (match) {
-                const qty = parseInt(match[1]);
-                const price = parseInt(match[2].replace(/[^\d]/g, ''));
-                cartData.push({
-                    name: name,
-                    quantity: qty,
-                    price: price,
-                    image: img
-                });
-            }
-        });
+				const match = info.match(/(\d+)\s*x\s*Rp\.?\s?([\d.,]+)/);
+				if (match) {
+					const qty = parseInt(match[1]);
+					const price = parseInt(match[2].replace(/[^\d]/g, ''));
+					cartData.push({
+						name: name,
+						quantity: qty,
+						price: price,
+						image: img
+					});
+				}
+			});
 
-        // Kirim ke server
-        fetch('/checkout', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') // Laravel CSRF
-            },
-            body: JSON.stringify({cart: cartData})
-        })
-        .then(response => response.json())
-        .then(data => {
-            alert('Checkout berhasil!');
-            // Kosongkan cart kalau perlu
-            document.querySelector('.header-cart-wrapitem').innerHTML = '';
-            updateCartTotal();
-            updateCartCount();
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-    });
-});
+			// Kirim ke server
+			fetch('/checkout', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') // Laravel CSRF
+				},
+				body: JSON.stringify({cart: cartData})
+			})
+			.then(response => response.json())
+			.then(data => {
+				alert('Checkout berhasil!');
+				// Kosongkan cart kalau perlu
+				document.querySelector('.header-cart-wrapitem').innerHTML = '';
+				updateCartTotal();
+				updateCartCount();
+			})
+			.catch(error => {
+				console.error('Error:', error);
+			});
+		});
+	});
 </script>
 
 
 <script>
-window.addEventListener('load', function () {
-    document.querySelector('.header-cart-wrapitem').addEventListener('click', function (e) {
-        if (e.target.closest('.header-cart-item-img')) {
-            const cartItem = e.target.closest('.header-cart-item');
-            if (cartItem) {
-                cartItem.remove();
-            }
-        }
-    });
-});
+	window.addEventListener('load', function () {
+		document.querySelector('.header-cart-wrapitem').addEventListener('click', function (e) {
+			if (e.target.closest('.header-cart-item-img')) {
+				const cartItem = e.target.closest('.header-cart-item');
+				if (cartItem) {
+					cartItem.remove();
+				}
+			}
+		});
+	});
 
 </script>
 @stack('js')
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  	function loadChatHistory() {
+		$.get('/user/chat-history', function (data) {
+			$('#chatMessages').html('');
+			data.forEach(chat => {
+				let align = chat.sender === 'user' ? 'text-end' : 'text-start';
+				let badgeClass = chat.sender === 'user' ? 'bg-primary' : 'bg-secondary';
+				$('#chatMessages').append(`<div class="${align} mb-2"><span class="badge ${badgeClass}">${chat.message}</span></div>`);
+			});
+			$('#chatMessages').scrollTop($('#chatMessages')[0].scrollHeight);
+		});
+	}
+
+	$('#chatModal').on('shown.bs.modal', loadChatHistory);
+
+	$('#chatForm').submit(function (e) {
+		e.preventDefault();
+		let message = $('#messageInput').val();
+
+		$.post('/user/send-message', { message: message, _token: '{{ csrf_token() }}' }, function () {
+			loadChatHistory();
+			$('#messageInput').val('');
+		});
+	});
+
+</script>
 
 </body>
 </html>

@@ -45,7 +45,10 @@
     <div class="sidebar-header position-relative">
         <div class="d-flex justify-content-between align-items-center">
             <div class="logo">
-                <a href="index.html"><img src="./assets/compiled/svg/logo.svg" alt="Logo" srcset=""></a>
+                <a href="" style="font-size: 18px;" >
+                    <img src="images/icons/logo.png" alt="Logo" style="width: 50px; height: auto;"/>
+                    Jaya Accu
+                </a>
             </div>
             <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
@@ -92,7 +95,7 @@
               </li>
 
               <li class="sidebar-item">
-                <a href="" class="sidebar-link">
+                <a href="/validasi" class="sidebar-link">
                   <i class="fa-solid fa-user-plus"></i>
                   <span>Validasi</span>
                 </a>
@@ -102,6 +105,12 @@
                 <a href="/products" class="sidebar-link">
                   <i class="bi bi-grid-1x2-fill"></i>
                   <span>Product</span>
+                </a>
+              </li>
+              <li class="sidebar-item">
+                <a href="/chat" class="sidebar-link">
+                <i class="fas fa-comment-dots"></i>
+                  <span>Chat User</span>
                 </a>
               </li>
               <li class="sidebar-item">
@@ -134,7 +143,7 @@
                             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Jadwal dan kegiatan</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Product</li>
                                 </ol>
                             </nav>
                         </div>
