@@ -69,3 +69,12 @@ Route::post('/user/send-message', [ChatController::class, 'userSend']);
 });
 Route::post('/checkout', [CheckoutController::class, 'store']);
 
+Route::get('/lang/{locale}', function ($locale) {
+    if (! in_array($locale, ['en', 'id'])) {
+        abort(400);
+    }
+    session(['locale' => $locale]);
+    app()->setLocale($locale);
+
+    return redirect()->back();
+});

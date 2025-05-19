@@ -136,7 +136,7 @@
     </style>
 
 @endpush
-@section('title', 'Order')
+@section('title', __('order.title'))
 
 @section('content')
      <!-- Modal -->
@@ -150,24 +150,24 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <p>Pilih alasan pembatalan:</p>
+                                <p>{{ __('order.alasan-title')}}</p>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="reason" value="Ingin mengubah alamat" id="reason1" required>
-                                    <label class="form-check-label" for="reason1">Ingin mengubah alamat</label>
+                                    <label class="form-check-label" for="reason1">{{ __('order.alasan1')}}</label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="reason" value="Ingin mengubah pesanan" id="reason2">
-                                    <label class="form-check-label" for="reason2">Ingin mengubah pesanan</label>
+                                    <label class="form-check-label" for="reason2">{{ __('order.alasan2')}}</label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="reason" value="Pesanan tidak diperlukan lagi" id="reason3">
-                                    <label class="form-check-label" for="reason3">Pesanan tidak diperlukan lagi</label>
+                                    <label class="form-check-label" for="reason3">{{ __('order.alasan3')}}</label>
                                 </div>
                             </div>
 
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                <button type="submit" class="btn btn-danger">Konfirmasi Batalkan</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('order.button-batal')}}</button>
+                                <button type="submit" class="btn btn-danger">{{ __('order.button-konfirmasi')}}</button>
                             </div>
                         </form>
                     </div>
@@ -178,11 +178,11 @@
             <!-- Top Info -->
             <div class="row d-flex justify-content-between px-3 top">
                 <div class="d-flex">
-                    <h6>ORDER <span class="text-primary font-weight-bold">#Y34XDHR</span></h6>
+                    <!-- <h6>ORDER <span class="text-primary font-weight-bold">#Y34XDHR</span></h6> -->
                 </div>
                 <div class="d-flex flex-column text-sm-right">
-                    <p class="mb-0">Expected Arrival <span>01/12/19</span></p>
-                    <p>USPS <span class="font-weight-bold">234094567242423422898</span></p>
+                    <!-- <p class="mb-0">Expected Arrival <span>01/12/19</span></p>
+                    <p>USPS <span class="font-weight-bold">234094567242423422898</span></p> -->
                 </div>
             </div>
 
@@ -192,7 +192,7 @@
                     @php
                         $status = $order->status ?? 'processed'; // contoh status dari database
                     @endphp
-                    <p>Status dari DB: {{ $status }}</p>
+                    <!-- <p>Status dari DB: {{ $status }}</p> -->
                     <ul id="progressbar" class="text-center">
                         <li class="{{ in_array($status, ['processed', 'shipped', 'en_route', 'approved']) ? 'active' : '' }}"></li>
                         <li class="{{ in_array($status, ['shipped', 'en_route', 'approved']) ? 'active' : '' }}"></li>
@@ -211,22 +211,22 @@
             <div class="row justify-content-between top">
                 <div class="col d-flex flex-column align-items-center icon-content">
                     <img class="icon" src="https://cdn1.iconfinder.com/data/icons/business-management-and-growth-20/64/1010-128.png" alt="Order Processed" style="width:60px;">
-                    <p class="font-weight-bold mt-2 text-center">Order<br>Processed</p>
+                    <p class="font-weight-bold mt-2 text-center">{{ __('order.title')}}<br>{{ __('order.proses')}}</p>
                 </div>
                 <div class="col d-flex flex-column align-items-center icon-content">
                     <img class="icon" src="https://cdn2.iconfinder.com/data/icons/logistics-delivery-1-3/66/20-1024.png" alt="Order Shipped" style="width:60px;">
-                    <p class="font-weight-bold mt-2 text-center">Order<br>Shipped</p>
+                    <p class="font-weight-bold mt-2 text-center">{{ __('order.title')}}<br>{{ __('order.dikirim')}}</p>
                 </div>
                 <div class="col d-flex flex-column align-items-center icon-content">
                     <img class="icon" src="https://cdn3.iconfinder.com/data/icons/streamline-icon-set-free-pack/48/Streamline-18-128.png" alt="Order En Route" style="width:60px;">
-                    <p class="font-weight-bold mt-2 text-center">Order<br>En Arrive</p>
+                    <p class="font-weight-bold mt-2 text-center">{{ __('order.title')}}<br>{{ __('order.tiba')}}</p>
                 </div>
             </div>
 
             <div class="container mt-5">
                 <!-- Tombol Trigger Modal -->
                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#cancelModal">
-                    Batalkan Pesanan
+                    {{ __('order.batal')}}
                 </button>
             </div>
 

@@ -1,6 +1,6 @@
 @extends('layout.master-user')
 
-@section('title', 'Product')
+@section('title', __('product.title'))
 
 
 @section('content')
@@ -69,28 +69,34 @@
 		<div class="flex-w flex-sb-m p-b-52">
 			<div class="flex-w flex-l-m filter-tope-group m-tb-10">
 				<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
-					All Products
+					{{ __('product.all')}}
 				</button>
 
-				@foreach ($kategoris as $kategori)
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".{{ Str::slug($kategori) }}">
-						{{ ucfirst($kategori) }}
-					</button>
-				@endforeach
+					@foreach ($kategoris as $kategori)
+						@php
+							$slug = Str::slug($kategori); // contoh: "Aki Mobil" -> "aki-mobil"
+						@endphp
+						<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".{{ $slug }}">
+							{{ __('product.' . $slug) }}
+						</button>
+					@endforeach
 			</div>
 		</div>
 
 
 			<div class="row isotope-grid">
-				@foreach($products as $product)
-					<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item {{ Str::slug($product->kategori) }}">
+				@foreach($products as $index => $product)
+						@php
+							$isHidden = $index >= 8 ? 'd-none load-more-item' : '';
+						@endphp
+						<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item {{ Str::slug($product->kategori) }}">
 
-						<!-- Block2 -->
-						<div class="block2">
-							<div class="block2-pic hov-img0">
-								<img src="{{ asset('storage/products/' . $product->foto) }}">
+							<!-- Block2 -->
+							<div class="block2" style="border: 1px solid #ccc; padding: 10px; border-radius: 8px; height: 400px;">
+								<div class="block2-pic hov-img0">
+									<img src="{{ asset('storage/products/' . $product->foto) }}">
 
-								<a href="#" 
+									<a href="#" 
 										class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1"
 										data-id="{{ $product->id }}"
 										data-nama="{{ $product->product }}"
@@ -100,38 +106,68 @@
 										data-stok="{{ $product->Stock }}"
 										>
 										Quick View
-								</a>
-							</div>
-
-							<div class="block2-txt flex-w flex-t p-t-14">
-								<div class="block2-txt-child1 flex-col-l">
-									<a href="#" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-										{{ $product->product }}
 									</a>
 
-									<span class="stext-105 cl3">
-										Rp {{ number_format($product->harga, 0, ',', '.') }}
-									</span>
 								</div>
 
-								<div class="block2-txt-child2 flex-r p-t-3">
-									<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-										<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON">
-										<img class="icon-heart2 dis-block trans-04 ab-t-l" src="images/icons/icon-heart-02.png" alt="ICON">
+								<div class="block2-txt flex-w flex-t p-t-14" >
+									<div class="block2-txt-child1 flex-col-l">
+										<a href="#" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+											{{ $product->product }}
+										</a>
+
+										<span class="stext-105 cl3">
+											Rp {{ number_format($product->harga, 0, ',', '.') }}
+										</span>
+									</div>
+
+									<div class="block2-txt-child2 flex-r p-t-3">
+										
+									
+									<!-- Trigger modal -->
+									<a href="#" class="btn-addwish-b2 d-block position-relative" data-bs-toggle="modal" data-bs-target="#chatModal">
+										<i class="fa-regular fa-comment" style="font-size: 24px; color: #6c757d;"></i>
 									</a>
+
+									<!-- Modal Chat -->
+									<div class="modal fade" id="chatModal" tabindex="-1" aria-labelledby="chatModalLabel" aria-hidden="true">
+										<div class="modal-dialog modal-dialog-scrollable">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title">Chat dengan Admin</h5>
+													<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+												</div>
+												<div class="modal-body">
+													<div id="chatMessages" style="max-height: 300px; overflow-y: auto;">
+														<!-- History chat user-admin akan di-load di sini -->
+													</div>
+													<form id="chatForm">
+														<div class="input-group mt-3">
+															<input type="text" class="form-control" id="messageInput" placeholder="Ketik pesan..." required>
+															<button class="btn btn-primary" type="submit">Kirim</button>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+									</div>
+
+
+
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
 				@endforeach
 			</div>
 
 			<!-- Load more -->
 			<div class="flex-c-m flex-w w-full p-t-45">
-				<a href="#" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
-					Load More
-				</a>
+				<button id="loadMoreBtn" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
+					{{ __('product.load-more')}}
+				</button>
 			</div>
+
 		</div>
 	</div>
 	

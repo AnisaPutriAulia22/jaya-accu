@@ -14,7 +14,7 @@ class HomeController extends Controller
 
     
         $products = Product::all();
-
+       
   
         return view('user.home', compact('kategoris', 'products'));
     }

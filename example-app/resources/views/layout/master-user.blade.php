@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app()->getLocale() }}">
 <head>
 	<title>@yield('title')</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="csrf-token" content="{{ csrf_token() }}">
-
+	<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 <!--===============================================================================================-->	
 	<link rel="icon" type="image/png" href="images/icons/favicon.png"/>
 <!--===============================================================================================-->
@@ -66,12 +66,12 @@
 							My Account
 						</a>
 
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
+						<a href="{{ url('/lang/en') }}" class="flex-c-m trans-04 p-lr-25">
 							EN
 						</a>
 
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							USD
+						<a href="{{ url('/lang/id') }}" class="flex-c-m trans-04 p-lr-25">
+							ID
 						</a>
 
 						<a href="/logout" class="flex-c-m trans-04 p-lr-25">
@@ -93,26 +93,26 @@
 					<div class="menu-desktop">
 						<ul class="main-menu">
 							<li>
-								<a href="/">Home</a>
-								
+								<a href="{{ url('/') }}">{{ __('menu.home') }}</a>
 							</li>
 
 							<li class="label1" data-label1="hot">
-								<a href="/product">Product</a>
+								<a href="{{ url('/product') }}">{{ __('menu.product') }}</a>
 							</li>
 
 							<li>
-								<a href="/about">About</a>
+								<a href="{{ url('/about') }}">{{ __('menu.about') }}</a>
 							</li>
 
-                            <li>
-                                <a href="/order">My Order</a>
-                            </li>
+							<li>
+								<a href="{{ url('/order') }}">{{ __('menu.order') }}</a>
+							</li>
 
 							<li>
-								<a href="/contact">Contact</a>
+								<a href="{{ url('/contact') }}">{{ __('menu.contact') }}</a>
 							</li>
 						</ul>
+
 					</div>	
 
 					<!-- Icon header -->
@@ -750,6 +750,23 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		});
 	});
 
+</script>
+<!-- load more -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const loadMoreBtn = document.getElementById('loadMoreBtn');
+        const hiddenItems = document.querySelectorAll('.load-more-item');
+
+        loadMoreBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            hiddenItems.forEach(item => {
+                item.classList.remove('d-none');
+            });
+
+            loadMoreBtn.style.display = 'none'; // sembunyikan tombol
+        });
+    });
 </script>
 
 </body>
