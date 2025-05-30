@@ -190,7 +190,7 @@
             <div class="row d-flex justify-content-center">
                 <div class="col-12">
                     @php
-                        $status = $order->status ?? 'processed'; // contoh status dari database
+                        $status = $order->status ?? 'processed'; 
                     @endphp
                     <!-- <p>Status dari DB: {{ $status }}</p> -->
                     <ul id="progressbar" class="text-center">
@@ -198,6 +198,7 @@
                         <li class="{{ in_array($status, ['shipped', 'en_route', 'approved']) ? 'active' : '' }}"></li>
                         <li class="{{ in_array($status, ['en_route', 'approved']) ? 'active' : '' }}"></li>
                     </ul>
+
 
                     @if(Str::contains($status, 'canceled'))
                         <div class="alert alert-danger text-center mt-3">Pesanan ini telah dibatalkan.</div>
@@ -228,6 +229,13 @@
                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#cancelModal">
                     {{ __('order.batal')}}
                 </button>
+                <form action="{{ route('order.restart', $order->id) }}" method="POST" class="d-inline">
+                    @csrf
+                    <button type="submit" class="btn btn-primary">
+                        Produk Sampai
+                    </button>
+                </form>
+
             </div>
 
 

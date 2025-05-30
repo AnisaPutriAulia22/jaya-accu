@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="csrf-token" content="{{ csrf_token() }}">
-	<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+	
 <!--===============================================================================================-->	
 	<link rel="icon" type="image/png" href="images/icons/favicon.png"/>
 <!--===============================================================================================-->
@@ -36,7 +36,7 @@
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 	<style>
 		.slick3-dots img {
     display: none !important;
@@ -62,19 +62,19 @@
 					<div class="right-top-bar flex-w h-full">
 						
 
-						<a href="/account" class="flex-c-m trans-04 p-lr-25">
+						<a href="/account" class="flex-c-m trans-04 p-lr-25 text-decoration-none">
 							My Account
 						</a>
 
-						<a href="{{ url('/lang/en') }}" class="flex-c-m trans-04 p-lr-25">
+						<a href="{{ url('/lang/en') }}" class="flex-c-m trans-04 p-lr-25 text-decoration-none">
 							EN
 						</a>
 
-						<a href="{{ url('/lang/id') }}" class="flex-c-m trans-04 p-lr-25">
+						<a href="{{ url('/lang/id') }}" class="flex-c-m trans-04 p-lr-25 text-decoration-none">
 							ID
 						</a>
 
-						<a href="/logout" class="flex-c-m trans-04 p-lr-25">
+						<a href="/logout" class="flex-c-m trans-04 p-lr-25 text-decoration-none">
 							Logout
 						</a>
 					</div>
@@ -93,23 +93,23 @@
 					<div class="menu-desktop">
 						<ul class="main-menu">
 							<li>
-								<a href="{{ url('/') }}">{{ __('menu.home') }}</a>
+								<a href="{{ url('/') }}" class="text-decoration-none">{{ __('menu.home') }}</a>
 							</li>
 
 							<li class="label1" data-label1="hot">
-								<a href="{{ url('/product') }}">{{ __('menu.product') }}</a>
+								<a href="{{ url('/product') }}" class="text-decoration-none">{{ __('menu.product') }}</a>
 							</li>
 
 							<li>
-								<a href="{{ url('/about') }}">{{ __('menu.about') }}</a>
+								<a href="{{ url('/about') }}" class="text-decoration-none">{{ __('menu.about') }}</a>
 							</li>
 
 							<li>
-								<a href="{{ url('/order') }}">{{ __('menu.order') }}</a>
+								<a href="{{ url('/order') }}" class="text-decoration-none">{{ __('menu.order') }}</a>
 							</li>
 
 							<li>
-								<a href="{{ url('/contact') }}">{{ __('menu.contact') }}</a>
+								<a href="{{ url('/contact') }}" class="text-decoration-none">{{ __('menu.contact') }}</a>
 							</li>
 						</ul>
 
@@ -437,7 +437,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		</div>
 	</div>
 
-
+@yield('scripts')
 <!--===============================================================================================-->	
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
@@ -661,6 +661,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			}
 		});
 </script>
+<!-- checkout btn -->
 <script>
 	document.addEventListener('DOMContentLoaded', function () {
 		document.getElementById('checkoutBtn').addEventListener('click', function () {
@@ -725,6 +726,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 </script>
 @stack('js')
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- chat user -->
 <script>
   	function loadChatHistory() {
 		$.get('/user/chat-history', function (data) {

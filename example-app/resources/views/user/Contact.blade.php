@@ -3,158 +3,84 @@
 @section('title', 'Contact')
 
 @section('content')
+<div class="container my-2">
+    <div class="row">
+        <div class="col-md-12">
+            
+            <div id="map" style="width: 100%; height: 300px;"></div>
+        </div>
+    </div>
+</div>
+<!-- Contact Info Box -->
+<div class="container" style="margin-bottom: 100px; margin-top: 100px;">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
 
-<!-- Cart -->
-<div class="wrap-header-cart js-panel-cart">
-		<div class="s-full js-hide-cart"></div>
+            <div class="contact-box p-4 border rounded shadow-sm d-flex justify-content-between">
 
-		<div class="header-cart flex-col-l p-l-65 p-r-25">
-			<div class="header-cart-title flex-w flex-sb-m p-b-8">
-				<span class="mtext-103 cl2">
-					Your Cart
-				</span>
+                <div class="contact-item d-flex align-items-start me-3" style="min-width: 30%;">
+                    <span class="icon me-3" style="font-size: 24px; color:#007bff;">
+                        <!-- Location icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                          <path d="M8 16s6-5.686 6-10A6 6 0 1 0 2 6c0 4.314 6 10 6 10zM8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/>
+                        </svg>
+                    </span>
+                    <div>
+                        <strong>Location:</strong><br>
+                        Pekuwon, Kec. Bangsal,<br>
+                        Kabupaten Mojokerto, Jawa Timur 61381
+                    </div>
+                </div>
 
-				<div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
-					<i class="zmdi zmdi-close"></i>
-				</div>
-			</div>
-			
-			<div class="header-cart-content flex-w js-pscroll">
-				<ul class="header-cart-wrapitem w-full">
-					<li class="header-cart-item flex-w flex-t m-b-12">
-						<div class="header-cart-item-img">
-							<img src="images/item-cart-01.jpg" alt="IMG">
-						</div>
+                <div class="contact-item d-flex align-items-start me-3" style="min-width: 30%;">
+                    <span class="icon me-3" style="font-size: 24px; color:#28a745;">
+                        <!-- Email icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16">
+                          <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.552L0 4.697zM6.761 8.83l-6.761 4.141A2 2 0 0 0 2 14h12a2 2 0 0 0 1.999-1.029l-6.761-4.141L8 9.586l-1.239-.757zM16 4.697l-5.803 3.552L16 11.801V4.697z"/>
+                        </svg>
+                    </span>
+                    <div>
+                        <strong>Email:</strong><br>
+                        rajhikmatulkaromah@gmail.com
+                    </div>
+                </div>
 
-						<div class="header-cart-item-txt p-t-8">
-							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								White Shirt Pleat
-							</a>
+                <div class="contact-item d-flex align-items-start" style="min-width: 30%;">
+                    <span class="icon me-3" style="font-size: 24px; color:#dc3545;">
+                        <!-- Phone icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">
+                          <path fill-rule="evenodd" d="M3.654 1.328a.678.678 0 0 1 .737-.06l2.5 1.5a.678.678 0 0 1 .252.787l-1 3a.678.678 0 0 1-.564.417l-1.7.2a11.285 11.285 0 0 0 4.516 4.516l.2-1.7a.678.678 0 0 1 .417-.564l3-1a.678.678 0 0 1 .787.252l1.5 2.5a.678.678 0 0 1-.06.737l-2.2 2.2a1.745 1.745 0 0 1-1.933.45c-2.077-.83-4.373-3.125-5.203-5.203a1.745 1.745 0 0 1 .45-1.933l2.2-2.2z"/>
+                        </svg>
+                    </span>
+                    <div>
+                        <strong>Call:</strong><br>
+                        +62 856-4537-5840
+                    </div>
+                </div>
 
-							<span class="header-cart-item-info">
-								1 x $19.00
-							</span>
-						</div>
-					</li>
+            </div>
 
-					<li class="header-cart-item flex-w flex-t m-b-12">
-						<div class="header-cart-item-img">
-							<img src="images/item-cart-02.jpg" alt="IMG">
-						</div>
+        </div>
+    </div>
+</div>
 
-						<div class="header-cart-item-txt p-t-8">
-							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								Converse All Star
-							</a>
+@endsection
 
-							<span class="header-cart-item-info">
-								1 x $39.00
-							</span>
-						</div>
-					</li>
+@section('scripts')
+<script>
+    function initMap() {
+        const location = { lat: -6.200000, lng: 106.816666 };
+        const map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 14,
+            center: location,
+        });
+        const marker = new google.maps.Marker({
+            position: location,
+            map: map,
+        });
+    }
+</script>
 
-					<li class="header-cart-item flex-w flex-t m-b-12">
-						<div class="header-cart-item-img">
-							<img src="images/item-cart-03.jpg" alt="IMG">
-						</div>
-
-						<div class="header-cart-item-txt p-t-8">
-							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								Nixon Porter Leather
-							</a>
-
-							<span class="header-cart-item-info">
-								1 x $17.00
-							</span>
-						</div>
-					</li>
-				</ul>
-				
-				<div class="w-full">
-					<div class="header-cart-total w-full p-tb-40">
-						Total: $75.00
-					</div>
-
-					<div class="header-cart-buttons flex-w w-full">
-						<a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
-							View Cart
-						</a>
-
-						<a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
-							Check Out
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-	<!-- Title page -->
-	<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('images/bg-01.jpg');">
-		<h2 class="ltext-105 cl0 txt-center">
-			Contact
-		</h2>
-	</section>	
-
-
-	<!-- Content page -->
-	<section class="bg0 p-t-104 p-b-116">
-		<div class="container">
-			<div class="flex-w flex-tr">
-			
-				<div class="w-full max-w-[900px] h-[300px] bg-white border border-gray-300 rounded-lg flex flex-col p-4 md:px-16 md:py-8 mx-auto pl-10">
-
-					<!-- Address -->
-					<div class="grid grid-cols-[auto_1fr] gap-x-6 w-full mb-12 items-start">
-						<span class="text-2xl text-gray-500 text-center" style="margin-left: 166px">
-							<span class="lnr lnr-map-marker"></span>
-						</span>
-						<div>
-							<h5 class="text-xl font-semibold text-gray-800">Address</h5>
-							<p class="text-base text-gray-600 mt-4">
-							Coza Store Center 8th floor, 379 Hudson St, New York, NY 10018 US
-							</p>
-						</div>
-					</div>
-
-
-
-					<!-- Let's Talk -->
-					<div class="grid grid-cols-[auto_1fr] gap-x-6 w-full mb-12 items-start">
-						<span class="text-2xl text-gray-500 text-center mr-6 flex-shrink-0" style="margin-left: 166px">
-							<span class="lnr lnr-phone-handset"></span>
-						</span>
-						<div class="ml-20">
-							<h5 class="text-xl font-semibold text-gray-800">Let's Talk</h5>
-							<p class="text-base text-blue-500 mt-4">+1 800 1236879</p>
-						</div>
-					</div>
-
-					<!-- Sale Support -->
-					<div class="grid grid-cols-[auto_1fr] gap-x-6 w-full mb-12 items-start">
-						<span class="text-2xl text-gray-500 text-center mr-6 flex-shrink-0" style="margin-left: 166px">
-						<span class="lnr lnr-envelope"></span>
-						</span>
-						<div class="ml-20">
-						<h5 class="text-xl font-semibold text-gray-800">Sale Support</h5>
-						<p class="text-base text-blue-500 mt-4">contact@example.com</p>
-						</div>
-					</div>
-
-				</div>
-
-
-
-			</div>
-		</div>
-	</section>	
-	
-	
-	<!-- Map -->
-	<div class="map">
-		<div class="size-303" id="google_map" data-map-x="40.691446" data-map-y="-73.886787" data-pin="images/icons/pin.png" data-scrollwhell="0" data-draggable="1" data-zoom="11"></div>
-	</div>
-
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB86ZhBu3Lk_BK03SdhwxHKapEjPy4POAc&callback=initMap" async defer></script>
 
 @endsection

@@ -25,6 +25,11 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
+Route::get('/ubah-password', function () {
+    return view('admin.ubahpassword'); // Ganti dengan nama file blade kamu
+})->name('password.form');
+Route::post('/ubah-password', [AuthController::class, 'updatePassword'])->name('password.update');
+Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
 
 
 // DEFAULT: redirect ke sesuai role
@@ -58,16 +63,19 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::get('/account', fn() => view('user.account'));
     Route::get('/about', fn() => view('user.about'));
     Route::get('/contact', fn() => view('user.contact'));
-
+    // Route::get('/detail-belanja', fn() => view('user.detail-belanja'));
     Route::get('order', [CheckoutController::class, 'showOrder'])->name('checkout.order');
     // Route::post('/order/cancel', [CheckoutController::class, 'cancelOrder'])->name('order.cancel');
     Route::post('/order/cancel', [CheckoutController::class, 'cancel'])->name('order.cancel');
-
+    Route::get('/detail-belanja', [CheckoutController::class, 'show']);
+Route::post('/detail-belanja', [CheckoutController::class, 'submitDetail']); 
 Route::get('/user/chat-history', [ChatController::class, 'userHistory']);
 Route::post('/user/send-message', [ChatController::class, 'userSend']);
+Route::post('/order/{id}/restart', [CheckoutController::class, 'restart'])->name('order.restart');
 
 });
 Route::post('/checkout', [CheckoutController::class, 'store']);
+
 
 Route::get('/lang/{locale}', function ($locale) {
     if (! in_array($locale, ['en', 'id'])) {

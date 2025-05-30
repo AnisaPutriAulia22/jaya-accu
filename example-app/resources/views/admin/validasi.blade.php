@@ -48,8 +48,9 @@
                             <td>
                                 <span class="badge {{ 
                                     $item->status == 'approved' ? 'bg-success' :
-                                    (Str::contains($item->status, 'canceled') ? 'bg-danger' : 'bg-warning') 
-                                }}">
+                                    ($item->status == 'finish' ? 'bg-primary' :
+                                        (Str::contains($item->status, 'canceled') ? 'bg-danger' : 'bg-warning')) 
+                                    }}">
                                     {{ ucfirst(str_replace('_', ' ', $item->status)) }}
                                 </span>
                                 @if($item->status == 'canceled_by_user' && $item->cancellation_reason)
@@ -60,11 +61,21 @@
                                 @if($item->status != 'canceled_by_user' && $item->status != 'canceled_by_admin')
                                     <form action="{{ route('admin.order.updateStatus', ['id' => $item->id, 'status' => 'approved']) }}" method="POST" style="display:inline;">
                                         @csrf
-                                        <button type="submit" class="btn btn-primary btn-sm mt-1">Setuju</button>
+                                        <button type="submit" class="btn btn-primary btn-sm mt-1" 
+                                            {{ in_array($item->status, ['approved', 'finish']) ? 'disabled' : '' }}>
+                                            Setuju
+                                        </button>
+
+
                                     </form>
                                     <form action="{{ route('admin.order.updateStatus', ['id' => $item->id, 'status' => 'canceled_by_admin']) }}" method="POST" style="display:inline;">
                                         @csrf
-                                        <button type="submit" class="btn btn-danger btn-sm mt-1">Batal</button>
+                                        <button type="submit" class="btn btn-danger btn-sm mt-1" 
+                                            {{ in_array($item->status, ['approved', 'finish']) ? 'disabled' : '' }}>
+                                            Batal
+                                        </button>
+
+
                                     </form>
                                 @endif
                             </td>

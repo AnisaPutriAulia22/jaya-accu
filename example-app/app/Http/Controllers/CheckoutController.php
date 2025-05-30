@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Validasi;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -25,6 +26,44 @@ class CheckoutController extends Controller
 
         return response()->json(['status' => 'success']);
     }
+    public function show()
+{
+    $user = auth()->check() ? auth()->user()->name : 'Guest';
+
+    $items = DB::table('validasi')
+        ->where('user', $user)
+        ->whereNull('pengiriman')
+        ->get();
+
+    $subtotal = $items->sum(function ($item) {
+        return $item->harga * $item->yang_dibeli;
+    });
+
+    return view('user.detail-belanja', compact('items', 'subtotal'));
+}
+
+
+public function submitDetail(Request $request)
+{
+    $metode = $request->input('delivery_option');
+    $alamat = $request->input('alamat');
+    $email = $request->input('email');
+    $telepon = $request->input('telepon');
+
+    DB::table('validasi')
+        ->where('user', auth()->check() ? auth()->user()->name : 'Guest')
+        ->whereNull('pengiriman')
+        ->update([
+            'pengiriman' => $metode,
+            'alamat' => $metode == 'delivery' ? $alamat : null,
+            'email' => $metode == 'delivery' ? $email : null,
+            'telepon' => $metode == 'delivery' ? $telepon : null,
+            'updated_at' => now()
+        ]);
+
+    return redirect('/order'); // atau halaman sukses
+}
+
     public function showOrder()
     {
    
@@ -65,6 +104,15 @@ class CheckoutController extends Controller
 
         return redirect()->back()->with('success', 'Pesanan berhasil dibatalkan.');
     }
+    public function restart($id)
+{
+    $data = Validasi::findOrFail($id);
+    $data->status = 'finish'; // status direset ke awal
+    $data->save();
+
+    return redirect()->back()->with('success', 'Status pesanan telah direset ke awal proses.');
+}
+
 
 
 }

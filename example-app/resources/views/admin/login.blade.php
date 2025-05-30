@@ -60,7 +60,8 @@
               <button class="btn btn-info btn-lg btn-block w-100" type="submit">Login</button>
             </div>
 
-            <p class="mb-0">Don't have an account? <a href="/register" class="link-info">Register here</a></p>
+            <p class="mb-0">Belum punya akun? <a href="/register" class="link-info">Daftar Disini</a></p>
+            <a href="/ubah-password">Ubah Password</a>
           </form>
         </div>
 

@@ -57,6 +57,43 @@ class AuthController extends Controller
 
         return redirect()->route('login')->with('success', 'Registrasi berhasil, silakan login.');
     }
+    public function updatePassword(Request $request)
+    {
+        // Validasi name dan email dulu
+        $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|email',
+        ], [
+            'name.required' => 'Nama wajib diisi.',
+            'email.required' => 'Email wajib diisi.',
+            'email.email' => 'Format email tidak valid.',
+        ]);
+
+        // Cek user
+        $user = User::where('name', $request->name)
+                    ->where('email', $request->email)
+                    ->first();
+
+        if (!$user) {
+            return back()->withErrors(['name' => 'nama dan email tidak ditemukan']);
+        }
+
+        // Validasi password
+        $request->validate([
+            'password' => 'required|string|confirmed|min:6',
+        ], [
+            'password.required' => 'Password wajib diisi.',
+            'password.min' => 'Password minimal 6 karakter.',
+            'password.confirmed' => 'Konfirmasi password tidak cocok.',
+        ]);
+
+        // Simpan password
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return redirect()->back()->with('success', 'Password berhasil diubah!');
+    }
+
 
     public function logout()
     {

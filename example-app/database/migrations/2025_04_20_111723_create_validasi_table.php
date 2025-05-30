@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('validasi', function (Blueprint $table) {
             $table->id();
-            $table->string('user')->nullable();         // Nama user
-            $table->string('product');                  // Nama produk
-            $table->integer('yang_dibeli');             // Jumlah dibeli
-            $table->string('foto');                     // URL gambar produk
-            $table->bigInteger('harga');                // Harga produk
+            $table->string('user')->nullable();         
+            $table->string('product');                  
+            $table->integer('yang_dibeli');             
+            $table->string('foto');                     
+            $table->bigInteger('harga');                
            
-            $table->timestamps();                       // created_at & updated_at
+            $table->timestamps();                       
         });
     }
 
