@@ -229,13 +229,18 @@
                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#cancelModal">
                     {{ __('order.batal')}}
                 </button>
+                @if ($order)
                 <form action="{{ route('order.restart', $order->id) }}" method="POST" class="d-inline">
                     @csrf
                     <button type="submit" class="btn btn-primary">
                         Produk Sampai
                     </button>
                 </form>
-
+                @else
+                    <button type="submit" class="btn btn-primary">
+                        Produk Sampai
+                    </button>
+                @endif
             </div>
 
 
