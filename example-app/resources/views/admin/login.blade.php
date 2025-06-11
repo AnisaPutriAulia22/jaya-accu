@@ -21,7 +21,7 @@
       <div class="col-sm-6 text-black">
 
         <div class="px-5 ms-xl-4 pt-4">
-          <img src="{{ asset('img/logo.png') }}" alt="Logo" style="width: 50px;">
+          <img src="{{ asset('img/logo.png') }}" alt="Logo" style="width: 50px; height: 50px;  margin: 0 auto 24px auto;">
 
           <span class="h1 fw-bold mb-0 fs-4">Jaya Accu</span>
         </div>
@@ -69,7 +69,7 @@
       </div>
 
       <div class="col-sm-6 px-0 d-none d-sm-block">
-        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img3.webp"
+        <img src="{{ asset('img/motor.jpeg') }}"
              alt="Login image" class="w-100 vh-100" style="object-fit: cover; object-position: left;">
       </div>
     </div>

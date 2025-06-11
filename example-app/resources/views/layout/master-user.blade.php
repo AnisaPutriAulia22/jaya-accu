@@ -92,25 +92,27 @@
 					<!-- Menu desktop -->
 					<div class="menu-desktop">
 						<ul class="main-menu">
-							<li>
+							<li class="{{ Request::is('/') || Request::is('home') ? 'active-menu' : '' }}">
+
 								<a href="{{ url('/') }}" class="text-decoration-none">{{ __('menu.home') }}</a>
 							</li>
 
-							<li class="label1" data-label1="hot">
+							<li class="label1 {{ Request::is('product') ? 'active-menu' : '' }}" data-label1="hot">
 								<a href="{{ url('/product') }}" class="text-decoration-none">{{ __('menu.product') }}</a>
 							</li>
 
-							<li>
+							<li class="{{ Request::is('about') ? 'active-menu' : '' }}">
 								<a href="{{ url('/about') }}" class="text-decoration-none">{{ __('menu.about') }}</a>
 							</li>
 
-							<li>
+							<li class="{{ Request::is('order') ? 'active-menu' : '' }}">
 								<a href="{{ url('/order') }}" class="text-decoration-none">{{ __('menu.order') }}</a>
 							</li>
 
-							<li>
+							<li class="{{ Request::is('contact') ? 'active-menu' : '' }}">
 								<a href="{{ url('/contact') }}" class="text-decoration-none">{{ __('menu.contact') }}</a>
 							</li>
+
 						</ul>
 
 					</div>	

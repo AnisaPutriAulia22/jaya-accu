@@ -38,8 +38,9 @@
           <div class="sidebar-header position-relative">
             <div class="d-flex justify-content-between align-items-center">
               <div class="logo">
+                <img src="images/icons/logo.png" alt="Logo" style="width: 50px; height: 50px;  margin: 0 auto 24px auto;"/>
                 <a href="" style="font-size: 18px;" >
-                    <img src="images/icons/logo.png" alt="Logo" style="width: 50px; height: auto;"/>
+                    
                     Jaya Accu
                 </a>
               </div>
